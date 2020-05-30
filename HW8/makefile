@@ -1,10 +1,7 @@
-all: binpack btgen
+all: binpack
 
 binpack: binpack.cpp
 	g++ binpack.cpp -o binpack
 
-btgen: btgen.cpp
-	g++ btgen.cpp -o btgen
-
 clean:
-	rm binpack	btgen
+	rm binpack
