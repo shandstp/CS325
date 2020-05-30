@@ -90,7 +90,9 @@ class bin {
             return this->capacity - this->size;
         }
         void print(){
-            cout << "<<bin>>" << endl << "Capacity: " << this->capacity << endl;
+            for(int i = 0; i < this->capacity; i++){
+                cout << this->content[i] << " ";
+            }
         }
 };
 
@@ -146,17 +148,17 @@ class binStack {
         void packbf(items* itm){
             this->binCount = 1;
             for(int i = 0; i < itm->itemCount(); i++){
-                bin* bf = NULL;
+                bin* bf = this->first;
                 int bestns = this->binCapacity;
                 bin* tmp = this->first;
-                while(tmp->nextBin() != NULL){
+                while(tmp != NULL){
                     if(tmp->space() - itm->uindex(i) < bestns && tmp->fits(itm->uindex(i))){
                         bf = tmp;
                         bestns = tmp->space() - itm->uindex(i);
                     }
                     tmp = tmp->nextBin();
                 }
-                if(bf == NULL){
+                if(!bf->fits(itm->uindex(i))){
                     this->add();
                     this->last->add(itm->uindex(i));
                 }
@@ -166,8 +168,18 @@ class binStack {
             }
 
         }
-        void print(){
+        void report(){
             cout << this->binCount;
+        }
+        void print(){
+            bin* tmp = this->first;
+            cout << endl << "<<Bins>>" << endl;
+            while(tmp != NULL){
+                tmp->print();
+                tmp = tmp->nextBin();
+                cout << endl;
+            }
+            cout << endl;
         }
 };
 
@@ -181,7 +193,9 @@ int main(int argc, char* argv[]){
         int csnum = 0;
         while(csnum < cscnt){ //process all cases
             getline(infile, line);
-            binStack bs(stoi(line));
+            binStack bsff(stoi(line));
+            binStack bsffd(stoi(line));
+            binStack bsbf(stoi(line));
 
             getline(infile, line);
             items tems(stoi(line));
@@ -190,14 +204,17 @@ int main(int argc, char* argv[]){
             tems.fill(line);
 
             cout << "Test Case " << csnum + 1 << " First Fit: ";
-            bs.packff(&tems);
-            bs.print();
+            bsff.packff(&tems);
+            bsff.report();
+            // bsff.print();
             cout << ", First Fit Decreasing: ";
-            bs.packffd(&tems);
-            bs.print();
+            bsffd.packffd(&tems);
+            bsffd.report();
+            // bsffd.print();
             cout << ", Best Fit: ";
-            bs.packbf(&tems);
-            bs.print();
+            bsbf.packbf(&tems);
+            bsbf.report();
+            // bsbf.print();
             cout << endl;
             
             csnum++;
