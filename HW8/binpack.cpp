@@ -86,6 +86,9 @@ class bin {
             }
             else { return false; }
         }
+        int space(){
+            return this->capacity - this->size;
+        }
         void print(){
             cout << "<<bin>>" << endl << "Capacity: " << this->capacity << endl;
         }
@@ -109,6 +112,7 @@ class binStack {
             this->binCount++;
         }
         void packff(items* itm){
+            this->binCount = 1;
             for(int i = 0; i < itm->itemCount(); i++){
                 bin* tmp = this->first;
                 while(!tmp->fits(itm->uindex(i)) && tmp->nextBin() != NULL){
@@ -124,6 +128,7 @@ class binStack {
             }
         }
         void packffd(items* itm){
+            this->binCount = 1;
             for(int i = 0; i < itm->itemCount(); i++){
                 bin* tmp = this->first;
                 while(!tmp->fits(itm->sindex(i)) && tmp->nextBin() != NULL){
@@ -138,12 +143,31 @@ class binStack {
                 }
             }
         }
-        void packbf(){
+        void packbf(items* itm){
+            this->binCount = 1;
+            for(int i = 0; i < itm->itemCount(); i++){
+                bin* bf = NULL;
+                int bestns = this->binCapacity;
+                bin* tmp = this->first;
+                while(tmp->nextBin() != NULL){
+                    if(tmp->space() - itm->uindex(i) < bestns && tmp->fits(itm->uindex(i))){
+                        bf = tmp;
+                        bestns = tmp->space() - itm->uindex(i);
+                    }
+                    tmp = tmp->nextBin();
+                }
+                if(bf == NULL){
+                    this->add();
+                    this->last->add(itm->uindex(i));
+                }
+                else{
+                    bf->add(itm->uindex(i));
+                }
+            }
 
         }
         void print(){
-            cout << "<<binStack>>" << endl << "Bin Capacity: " << this->binCapacity << endl;
-            cout << "Bins Used: " << this->binCount << endl;
+            cout << this->binCount;
         }
 };
 
@@ -165,9 +189,16 @@ int main(int argc, char* argv[]){
             getline(infile, line);
             tems.fill(line);
 
+            cout << "Test Case " << csnum + 1 << " First Fit: ";
             bs.packff(&tems);
             bs.print();
-            tems.print();
+            cout << ", First Fit Decreasing: ";
+            bs.packffd(&tems);
+            bs.print();
+            cout << ", Best Fit: ";
+            bs.packbf(&tems);
+            bs.print();
+            cout << endl;
             
             csnum++;
         }
