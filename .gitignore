@@ -31,3 +31,8 @@
 *.out
 *.app
 HW8/binpack
+
+# Text Files
+*.txt
+*.meh
+*.old
