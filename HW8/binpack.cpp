@@ -123,8 +123,20 @@ class binStack {
                 }
             }
         }
-        void packffd(){
-
+        void packffd(items* itm){
+            for(int i = 0; i < itm->itemCount(); i++){
+                bin* tmp = this->first;
+                while(!tmp->fits(itm->sindex(i)) && tmp->nextBin() != NULL){
+                    tmp = tmp->nextBin();
+                }
+                if(tmp->fits(itm->sindex(i))){
+                    tmp->add(itm->sindex(i));
+                }
+                else{
+                    this->add();
+                    this->last->add(itm->sindex(i));
+                }
+            }
         }
         void packbf(){
 
