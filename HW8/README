@@ -1,0 +1,7 @@
+Simply run make to compile the source files. Example:
+
+$ make
+
+followed by:
+
+$ ./binpack
