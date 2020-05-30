@@ -1,0 +1,10 @@
+Simply run make to compile the source files. Example:
+
+$ make
+
+followed by:
+
+$ ./rivals <text.txt>
+
+where <text.txt> is the name of the .txt file containing wrestlers and their rivalries
+

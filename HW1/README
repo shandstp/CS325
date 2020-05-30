@@ -1,0 +1,12 @@
+Simply run make to compile all source files. Example:
+
+$ make
+
+followed by:
+
+$ ./insertsort
+$ ./mergesort
+$ ./insertTime
+$ ./mergeTime
+
+to run each program

@@ -1,0 +1,10 @@
+Simply run make to compile the source files. Example:
+
+$ make
+
+followed by:
+
+$ ./shopping
+
+NOTE: The program currently compiles and runs but does not consistently return the correct values. 
+If you're reading this it probably means I wasn't able to get it sorted out before the deadline. Sorry.

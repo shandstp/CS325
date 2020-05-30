@@ -1,0 +1,17 @@
+Simply run make to compile the source files. Example:
+
+$ make
+
+followed by:
+
+$ ./insertsort <alpha>
+
+e.g: 
+
+$ ./badSort 2/3
+or
+$ ./badSort .6
+
+to run the program
+
+NOTE: I was unable to get the badSort program to sort the right half of any lists and ran out of time to write badSortTime due to unsuccessful troubleshooting efforts on this one. Sorry.

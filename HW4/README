@@ -1,0 +1,10 @@
+Simply run make to compile the source files. Example:
+
+$ make
+
+followed by:
+
+$ ./change
+
+Note: Requires data.txt file in same directory as the program. 
+Each line must contain three numbers separated by spaces or tabs 
